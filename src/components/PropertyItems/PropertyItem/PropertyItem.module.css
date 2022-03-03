@@ -1,0 +1,77 @@
+.propertyItemImageWrapper {
+  width: 100%;
+  height: 15rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.propertyItemAvailableBanner {
+  position: absolute;
+  z-index: 2;
+  background-color: var(--color-background-light-elements);
+  border-radius: 2rem;
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  top: 1rem;
+  left: 1rem;
+}
+
+.propertyItemImage {
+  position: absolute;
+  width: 100%;
+  object-fit: contain;
+}
+
+.propertyItemType {
+  margin-bottom: 0.4rem;
+}
+
+.propertyItemDetails {
+  padding: 2rem 0;
+  display: flex;
+  gap: 2rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-light-text-and-details);
+}
+
+.propertyItemDetails span {
+  font-size: 1.7rem;
+  font-weight: 700;
+  margin-right: 0.2rem;
+  color: var(--color-dark-text);
+}
+
+.propertyItemDescription {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--color-light-text-and-details);
+}
+
+.propertyItemData,
+.propertyItemPrice {
+  padding: 2rem;
+}
+
+.propertyItemPrice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 0.1rem solid var(--color-background-light-elements);
+}
+
+.propertyItemPrice h4 {
+  color: var(--color-main);
+}
+
+.propertyItemPriceValue {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-light-text-and-details);
+}
+
+.propertyItemPriceValue span {
+  font-weight: 800;
+  color: var(--color-dark-text);
+}
