@@ -1,0 +1,21 @@
+.checkBoxGroup {
+  display: flex;
+  flex-direction: row;
+  color: var(--color-light-text-and-details);
+  gap: 1rem;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.checkBoxGroup input {
+  width: 0;
+  height: 0;
+  position: absolute;
+}
+
+.checkBox {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.4rem;
+  border: 0.1rem solid var(--color-light-text-and-details);
+}

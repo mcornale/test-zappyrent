@@ -1,0 +1,9 @@
+.multiSelect {
+  color: var(--color-light-text-and-details);
+  border-radius: 3rem;
+  border: 0.1rem solid var(--color-light-text-and-details);
+  padding: 0.8rem 2rem;
+  display: flex;
+  gap: 2rem;
+  cursor: pointer;
+}

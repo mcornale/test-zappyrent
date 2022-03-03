@@ -6,6 +6,7 @@
   --color-background-light-elements: #e5e5e5;
   --color-background-very-light-elements: #ffffff;
   --color-main: #029d9d;
+  --color-box-shadow: rgba(0, 0, 0, 0.08);
 }
 
 *,
@@ -24,4 +25,10 @@ body {
   font-family: 'Nunito', sans-serif;
   font-weight: 500;
   font-size: 1.6rem;
+  min-height: 100vh;
+}
+
+header {
+  padding: 4rem 0 0;
+  box-shadow: 0rem 0rem 1rem var(--color-box-shadow);
 }
