@@ -1,28 +1,9 @@
-import { CURRENCIES } from '../../../costants/currencies';
+import { CURRENCIES } from '../../../constants/currencies';
+import { PropertyItemType } from '../../../types/properties';
 import Card from '../../Card/Card';
 import styles from './PropertyItem.module.css';
 
-type Props = {
-  available: boolean;
-  baths: number;
-  beds: number;
-  cap: string;
-  city: string;
-  currency: string;
-  description: string;
-  floor: number;
-  id: number;
-  images: { url: string }[];
-  price: number;
-  province: string;
-  street: string;
-  street_number: string;
-  tenants: number;
-  title: string;
-  type: string;
-};
-
-const PropertyItem = (props: Props) => {
+const PropertyItem = (props: PropertyItemType) => {
   const {
     available,
     baths,
