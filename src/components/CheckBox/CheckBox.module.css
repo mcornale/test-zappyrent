@@ -1,10 +1,15 @@
 .checkBoxGroup {
   display: flex;
   flex-direction: row;
+  justify-content: start;
   color: var(--color-light-text-and-details);
   gap: 1rem;
   cursor: pointer;
   padding: 1rem;
+}
+
+.checkBoxGroupLabelAfter {
+  flex-direction: row-reverse;
 }
 
 .checkBoxGroup input {
@@ -18,4 +23,22 @@
   height: 2rem;
   border-radius: 0.4rem;
   border: 0.1rem solid var(--color-light-text-and-details);
+  position: relative;
+}
+
+.checkBox::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 0.3rem;
+  background-color: var(--color-main);
+  transition: all 0.3s cubic-bezier(0, 0.54, 0.4, 1.18);
+}
+
+.checkBoxGroup input:checked + .checkBox::before {
+  transform: translate(-50%, -50%) scale(1);
 }

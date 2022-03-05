@@ -53,3 +53,11 @@ h5 {
   color: var(--color-light-text-and-details);
   font-weight: 600;
 }
+
+button {
+  cursor: pointer;
+  background: transparent;
+  outline: none;
+  border: none;
+  font: inherit;
+}

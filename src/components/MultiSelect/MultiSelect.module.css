@@ -4,6 +4,30 @@
   border: 0.1rem solid var(--color-light-text-and-details);
   padding: 0.8rem 2rem;
   display: flex;
+  align-items: center;
   gap: 2rem;
   cursor: pointer;
+  position: relative;
+}
+
+.multiSelect img {
+  transition: all 0.3s;
+}
+
+.multiSelectOpen img {
+  transform: rotate(180deg);
+}
+
+.multiSelectOptionsActive label {
+  font-weight: 700;
+}
+
+.multiSelectOptions {
+  background-color: var(--color-background-very-light-elements);
+  position: absolute;
+  z-index: 2;
+  border-radius: 2rem;
+  border: 0.1rem solid var(--color-light-text-and-details);
+  padding: 0.8rem;
+  margin-top: 0.8rem;
 }

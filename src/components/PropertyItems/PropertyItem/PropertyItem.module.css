@@ -7,7 +7,7 @@
 
 .propertyItemAvailableBanner {
   position: absolute;
-  z-index: 2;
+  z-index: 1;
   background-color: var(--color-background-light-elements);
   border-radius: 2rem;
   padding: 1rem 2rem;
