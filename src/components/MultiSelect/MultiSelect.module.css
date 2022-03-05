@@ -4,10 +4,12 @@
   border: 0.1rem solid var(--color-light-text-and-details);
   padding: 0.8rem 2rem;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 2rem;
+  gap: 1;
   cursor: pointer;
   position: relative;
+  width: 20rem;
 }
 
 .multiSelect label {
