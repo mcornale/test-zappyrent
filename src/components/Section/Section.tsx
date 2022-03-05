@@ -1,7 +1,7 @@
 import styles from './Section.module.css';
 
 type Props = {
-  children: JSX.Element | JSX.Element[];
+  children: JSX.Element | JSX.Element[] | null;
 };
 
 const Section = (props: Props) => {

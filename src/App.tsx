@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Error from './components/Error/Error';
 import FilterBar from './components/FilterBar/FilterBar';
 import Logo from './components/Logo/Logo';
 import PropertyItemList from './components/PropertyItems/PropertyItemList/PropertyItemList';
@@ -11,11 +12,13 @@ const App = () => {
     []
   );
   const [onlyAvailableProperties, setOnlyAvailableProperties] = useState(false);
+  const [errorFetchingProperties, setErrorFetchingProperties] = useState('');
 
   useEffect(() => {
     const fetchProperties = async () => {
       try {
         setIsFetching(true);
+        setErrorFetchingProperties('');
         let queryParams: string[] = [];
 
         if (onlyAvailableProperties) queryParams.push('available=true');
@@ -30,15 +33,22 @@ const App = () => {
           )}`
         );
 
-        if (!response.ok)
-          throw new Error(
-            'Non è stato possibile recuperare i dati sulle proprietà'
-          );
+        if (!response.ok) throw Error;
 
         const data = await response.json();
+        if (
+          data.length === 0 &&
+          (onlyAvailableProperties || selectedPropertyTypes.length > 0)
+        )
+          setErrorFetchingProperties(
+            'Non è stato possibile recuperare i dati sulle proprietà. Prova a rimuovere qualche filtro'
+          );
+
         setProperties(data);
-      } catch (e) {
-        alert(e);
+      } catch (err) {
+        setErrorFetchingProperties(
+          'Non è stato possibile recuperare i dati sulle proprietà'
+        );
       } finally {
         setIsFetching(false);
       }
@@ -60,7 +70,11 @@ const App = () => {
       </header>
       <main>
         <Section>
-          <PropertyItemList isFetching={isFetching} properties={properties} />
+          {errorFetchingProperties ? (
+            <Error error={errorFetchingProperties} />
+          ) : (
+            <PropertyItemList isFetching={isFetching} properties={properties} />
+          )}
         </Section>
       </main>
     </>
