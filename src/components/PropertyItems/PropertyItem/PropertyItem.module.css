@@ -1,3 +1,8 @@
+.propertyItem {
+  display: flex;
+  flex-direction: column;
+}
+
 .propertyItemImageWrapper {
   width: 100%;
   height: 15rem;
@@ -23,11 +28,18 @@
   object-fit: contain;
 }
 
+.propertyItemData {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .propertyItemType {
   margin-bottom: 0.4rem;
 }
 
-.propertyItemDetails {
+.propertyItemDetailsRow {
   padding: 2rem 0;
   display: flex;
   gap: 2rem;
@@ -36,7 +48,7 @@
   color: var(--color-light-text-and-details);
 }
 
-.propertyItemDetails span {
+.propertyItemDetailsRow span {
   font-size: 1.7rem;
   font-weight: 700;
   margin-right: 0.2rem;
@@ -49,7 +61,7 @@
   color: var(--color-light-text-and-details);
 }
 
-.propertyItemData,
+.propertyItemDetails,
 .propertyItemPrice {
   padding: 2rem;
 }

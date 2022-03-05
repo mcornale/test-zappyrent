@@ -2,12 +2,16 @@ import styles from './Card.module.css';
 
 type Props = {
   children: JSX.Element[] | JSX.Element;
+  className: string;
 };
 
 const Card = (props: Props) => {
-  const { children } = props;
+  const { children, className } = props;
 
-  return <div className={styles.card}>{children}</div>;
+  const cardClassNameArr = [styles.card];
+  if (className) cardClassNameArr.push(className);
+
+  return <div className={cardClassNameArr.join(' ')}>{children}</div>;
 };
 
 export default Card;
