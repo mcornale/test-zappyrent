@@ -6,6 +6,7 @@ import Section from './components/Section/Section';
 
 const App = () => {
   const [properties, setProperties] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>(
     []
   );
@@ -14,6 +15,7 @@ const App = () => {
   useEffect(() => {
     const fetchProperties = async () => {
       try {
+        setIsFetching(true);
         let queryParams: string[] = [];
 
         if (onlyAvailableProperties) queryParams.push('available=true');
@@ -37,6 +39,8 @@ const App = () => {
         setProperties(data);
       } catch (e) {
         alert(e);
+      } finally {
+        setIsFetching(false);
       }
     };
 
@@ -56,8 +60,7 @@ const App = () => {
       </header>
       <main>
         <Section>
-          <p>{properties.length} alloggi trovati</p>
-          <PropertyItemList properties={properties} />
+          <PropertyItemList isFetching={isFetching} properties={properties} />
         </Section>
       </main>
     </>

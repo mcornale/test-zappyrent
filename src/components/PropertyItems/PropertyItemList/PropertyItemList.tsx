@@ -1,17 +1,31 @@
-import { PropertyItemListType } from '../../../types/properties';
+import { PropertyItemType } from '../../../types/properties';
 import PropertyItem from '../PropertyItem/PropertyItem';
 
 import styles from './PropertyItemList.module.css';
 
-const PropertyItemList = (props: PropertyItemListType) => {
-  const { properties } = props;
+type Props = {
+  isFetching: boolean;
+  properties: PropertyItemType[];
+};
+
+const PropertyItemList = (props: Props) => {
+  const { isFetching, properties } = props;
+
+  const propertyItemListWrapperClassNameArr = [styles.propertyItemListWrapper];
+  if (isFetching)
+    propertyItemListWrapperClassNameArr.push(
+      styles.propertyItemListWrapperOverlay
+    );
 
   return (
-    <section className={styles.propertyItemList}>
-      {properties.map((propertyItem) => (
-        <PropertyItem key={propertyItem.id} {...propertyItem} />
-      ))}
-    </section>
+    <div className={propertyItemListWrapperClassNameArr.join(' ')}>
+      {!isFetching && <p>{properties?.length} alloggi trovati</p>}
+      <section className={styles.propertyItemList}>
+        {properties.map((propertyItem) => (
+          <PropertyItem key={propertyItem.id} {...propertyItem} />
+        ))}
+      </section>
+    </div>
   );
 };
 

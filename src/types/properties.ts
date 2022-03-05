@@ -17,7 +17,3 @@ export type PropertyItemType = {
   title: string;
   type: string;
 };
-
-export type PropertyItemListType = {
-  properties: PropertyItemType[];
-};
