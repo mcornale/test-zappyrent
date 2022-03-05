@@ -1,25 +1,40 @@
 import styles from './MultiSelect.module.css';
 import arrowDownSrc from '../../assets/icons/arrow-down.svg';
 import CheckBox from '../CheckBox/CheckBox';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type Props = {
+  label: string;
   options: string[];
+  onChangeSelectedOptions: Dispatch<SetStateAction<string[]>>;
 };
 
 const MultiSelect = (props: Props) => {
-  const { options } = props;
+  const { label, options, onChangeSelectedOptions } = props;
 
-  const [isMultiSelectOpen, setMultiSelectOpen] = useState(false);
+  const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false);
   const [activeOptionsArr, setActiveOptionsArr] = useState<string[]>([]);
 
-  const multiSelectLabel =
-    !isMultiSelectOpen && activeOptionsArr.length > 0
-      ? activeOptionsArr[0]
-      : 'Tipologia';
+  const activeOptionsLength = activeOptionsArr.length;
+
+  let multiSelectLabel =
+    !isMultiSelectOpen && activeOptionsLength > 0 ? activeOptionsArr[0] : label;
+  if (!isMultiSelectOpen && activeOptionsLength > 1)
+    multiSelectLabel += ` + ${activeOptionsLength - 1}`;
+
+  const multiSelectClassNameArr = [styles.multiSelect];
+  if (isMultiSelectOpen) multiSelectClassNameArr.push(styles.multiSelectOpen);
+  if (!isMultiSelectOpen && activeOptionsArr.length > 0)
+    multiSelectClassNameArr.push(styles.multiSelectOptionsActive);
+
+  useEffect(() => {
+    if (!isMultiSelectOpen) onChangeSelectedOptions(activeOptionsArr);
+  }, [isMultiSelectOpen, activeOptionsArr, onChangeSelectedOptions]);
 
   const handleMultiSelectClick = () => {
-    setMultiSelectOpen((prevMultiSelectState) => !prevMultiSelectState);
+    setIsMultiSelectOpen(
+      (prevIsMultiSelectOpenState) => !prevIsMultiSelectOpenState
+    );
   };
 
   const handleOptionCheckBoxChange = (optionChanged: any) => {
@@ -33,7 +48,7 @@ const MultiSelect = (props: Props) => {
         );
       } else newActiveOptionsArr.push(optionChanged);
 
-      return newActiveOptionsArr;
+      return newActiveOptionsArr.sort();
     });
   };
 
@@ -41,20 +56,9 @@ const MultiSelect = (props: Props) => {
     <div className={styles.multiSelectWrapper}>
       <button
         onClick={handleMultiSelectClick}
-        className={`${styles.multiSelect} ${
-          isMultiSelectOpen && styles.multiSelectOpen
-        } ${
-          !isMultiSelectOpen &&
-          activeOptionsArr.length > 0 &&
-          styles.multiSelectOptionsActive
-        }`}
+        className={multiSelectClassNameArr.join(' ')}
       >
-        <label>
-          {multiSelectLabel}
-          {!isMultiSelectOpen &&
-            activeOptionsArr.length > 1 &&
-            ` + ${activeOptionsArr.length - 1}`}
-        </label>
+        <label>{multiSelectLabel}</label>
         <img src={arrowDownSrc} alt='select arrow' />
       </button>
       {isMultiSelectOpen && (
