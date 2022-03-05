@@ -10,6 +10,10 @@
   position: relative;
 }
 
+.multiSelect label {
+  cursor: inherit;
+}
+
 .multiSelect img {
   transition: all 0.3s;
 }
