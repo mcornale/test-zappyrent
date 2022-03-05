@@ -1,4 +1,4 @@
-export const PROPERTIES_TYPES = [
+export const PROPERTY_TYPES = [
   'Private Room',
   'Entire Property',
   'Shared Room',
