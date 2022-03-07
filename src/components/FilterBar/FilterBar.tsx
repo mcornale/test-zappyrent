@@ -2,19 +2,16 @@ import CheckBox from '../CheckBox/CheckBox';
 import MultiSelect from '../MultiSelect/MultiSelect';
 import { PROPERTY_TYPES } from '../../constants/property-types';
 import styles from './FilterBar.module.css';
-import { Dispatch, SetStateAction } from 'react';
+import { useContext } from 'react';
+import { PropertiesContext } from '../../context/PropertiesContext';
 
-type Props = {
-  setSelectedPropertyTypes: Dispatch<SetStateAction<string[]>>;
-  setOnlyAvailableProperties: Dispatch<SetStateAction<boolean>>;
-};
-
-const FilterBar = (props: Props) => {
-  const { setSelectedPropertyTypes, setOnlyAvailableProperties } = props;
+const FilterBar = () => {
+  const { setShowOnlyAvailableProperties, setSelectedPropertyTypes } =
+    useContext(PropertiesContext)!;
 
   const handleOnlyAvailablePropertiesChange = () => {
-    setOnlyAvailableProperties(
-      (prevOnlyAvailableProperties) => !prevOnlyAvailableProperties
+    setShowOnlyAvailableProperties(
+      (prevShowOnlyAvailableProperties) => !prevShowOnlyAvailableProperties
     );
   };
 

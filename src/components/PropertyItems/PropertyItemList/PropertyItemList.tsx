@@ -1,15 +1,13 @@
-import { PropertyItemType } from '../../../types/properties';
+import { useContext } from 'react';
+import { PropertiesContext } from '../../../context/PropertiesContext';
+import Error from '../../Error/Error';
 import PropertyItem from '../PropertyItem/PropertyItem';
 
 import styles from './PropertyItemList.module.css';
 
-type Props = {
-  isFetching: boolean;
-  properties: PropertyItemType[];
-};
-
-const PropertyItemList = (props: Props) => {
-  const { isFetching, properties } = props;
+const PropertyItemList = () => {
+  const { properties, isFetching, errorFetchingProperties } =
+    useContext(PropertiesContext)!;
 
   const propertyItemListWrapperClassNameArr = [styles.propertyItemListWrapper];
   if (isFetching)
@@ -18,14 +16,19 @@ const PropertyItemList = (props: Props) => {
     );
 
   return (
-    <div className={propertyItemListWrapperClassNameArr.join(' ')}>
-      {!isFetching && <p>{properties?.length} alloggi trovati</p>}
-      <section className={styles.propertyItemList}>
-        {properties.map((propertyItem) => (
-          <PropertyItem key={propertyItem.id} {...propertyItem} />
-        ))}
-      </section>
-    </div>
+    <>
+      {errorFetchingProperties && <Error error={errorFetchingProperties} />}
+      {!errorFetchingProperties && (
+        <div className={propertyItemListWrapperClassNameArr.join(' ')}>
+          {!isFetching && <p>{properties?.length} alloggi trovati</p>}
+          <section className={styles.propertyItemList}>
+            {properties.map((propertyItem) => (
+              <PropertyItem key={propertyItem.id} propertyItem={propertyItem} />
+            ))}
+          </section>
+        </div>
+      )}
+    </>
   );
 };
 
