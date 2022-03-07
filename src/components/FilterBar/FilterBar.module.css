@@ -4,3 +4,10 @@
   gap: 2rem;
   padding: 4rem 4rem 2rem;
 }
+
+@media (max-width: 45em) {
+  .filterBar {
+    padding: 4rem 0rem 2rem;
+    gap: 1rem;
+  }
+}

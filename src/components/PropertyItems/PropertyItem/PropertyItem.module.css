@@ -9,7 +9,7 @@
 
 .propertyItemFullInfo {
   text-align: center;
-  width: 60rem;
+  width: min(60rem, 90vw);
 }
 
 .propertyItemData {

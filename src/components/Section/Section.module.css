@@ -1,4 +1,11 @@
 .section {
   max-width: 120rem;
+  padding: 0 4rem;
   margin: auto;
+}
+
+@media (max-width: 45em) {
+  .section {
+    padding: 0 2rem;
+  }
 }

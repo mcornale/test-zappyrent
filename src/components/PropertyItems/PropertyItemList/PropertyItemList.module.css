@@ -12,3 +12,16 @@
 .propertyItemList a > div {
   height: 100%;
 }
+
+@media (max-width: 65em) {
+  .propertyItemList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 45em) {
+  .propertyItemList {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
