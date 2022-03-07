@@ -17,11 +17,13 @@ const MultiSelect = (props: Props) => {
 
   const activeOptionsLength = activeOptionsArr.length;
 
+  //choice of the label to show
   let multiSelectLabel =
     !isMultiSelectOpen && activeOptionsLength > 0 ? activeOptionsArr[0] : label;
   if (!isMultiSelectOpen && activeOptionsLength > 1)
     multiSelectLabel += ` + ${activeOptionsLength - 1}`;
 
+  //choice of the classnames to give to the multi select element
   const multiSelectClassNameArr = [styles.multiSelect];
   if (isMultiSelectOpen) multiSelectClassNameArr.push(styles.multiSelectOpen);
   if (!isMultiSelectOpen && activeOptionsArr.length > 0)

@@ -15,6 +15,7 @@ const PropertyItem = (props: Props) => {
 
   const { properties } = useContext(PropertiesContext)!;
 
+  //if propertyTitle is detected in the url find the requested property
   const { propertyTitle } = useParams();
   const isRequestedByUrl = propertyTitle && !propertyItem;
   if (isRequestedByUrl)
@@ -23,6 +24,7 @@ const PropertyItem = (props: Props) => {
         property.title.toLowerCase() === propertyTitle.split('-').join(' ')
     );
 
+  //choice of the classnames to give to the property item element
   const propertyItemClassNameArr = [styles.propertyItem];
   if (isRequestedByUrl)
     propertyItemClassNameArr.push(styles.propertyItemFullInfo);
