@@ -4,6 +4,8 @@ import { CURRENCIES } from '../../../constants/currencies';
 import { PropertiesContext } from '../../../context/PropertiesContext';
 import { PropertyItemType } from '../../../types/properties';
 import Button from '../../Button/Button';
+import Error from '../../Error/Error';
+import Loader from '../../Loader/Loader';
 import styles from './PropertyItem.module.css';
 
 type Props = {
@@ -13,9 +15,11 @@ type Props = {
 const PropertyItem = (props: Props) => {
   let { propertyItem } = props;
 
-  const { properties } = useContext(PropertiesContext)!;
+  const { properties, isFetching } = useContext(PropertiesContext)!;
 
   //if propertyTitle is detected in the url find the requested property
+  const errorGettingProperty =
+    'Non è stato possibile trovare la proprietà da te richiesta';
   const { propertyTitle } = useParams();
   const isRequestedByUrl = propertyTitle && !propertyItem;
   if (isRequestedByUrl)
@@ -31,55 +35,63 @@ const PropertyItem = (props: Props) => {
 
   return (
     <article className={propertyItemClassNameArr.join(' ')}>
-      <div className={styles.propertyItemData}>
-        <div className={styles.propertyItemImageWrapper}>
-          {!isRequestedByUrl && propertyItem?.available && (
-            <p className={styles.propertyItemAvailableBanner}>
-              Disponibile subito
+      {!propertyItem && isFetching && <Loader />}
+      {!propertyItem && !isFetching && <Error error={errorGettingProperty} />}
+      {propertyItem && (
+        <>
+          <div className={styles.propertyItemData}>
+            <div className={styles.propertyItemImageWrapper}>
+              {!isRequestedByUrl && propertyItem?.available && (
+                <p className={styles.propertyItemAvailableBanner}>
+                  Disponibile subito
+                </p>
+              )}
+              <img
+                className={styles.propertyItemImage}
+                src={propertyItem?.images[0].url}
+                alt=''
+              />
+            </div>
+            <div className={styles.propertyItemHeadings}>
+              {!isRequestedByUrl && (
+                <h5 className={styles.propertyItemType}>
+                  {propertyItem?.type}
+                </h5>
+              )}
+              <h3>{propertyItem?.title}</h3>
+            </div>
+            <div className={styles.propertyItemSpecifications}>
+              <p>
+                <span>{propertyItem?.tenants}</span> inquilini
+              </p>
+              <p>
+                <span>{propertyItem?.baths}</span> bagno
+              </p>
+              <p>
+                <span>{propertyItem?.beds}</span> letti
+              </p>
+            </div>
+            {isRequestedByUrl && (
+              <p className={styles.propertyItemAddress}>
+                {`${propertyItem?.street} ${propertyItem?.street_number}, ${propertyItem?.cap} ${propertyItem?.city}`}
+              </p>
+            )}
+            <p className={styles.propertyItemDescription}>
+              {propertyItem?.description}
             </p>
-          )}
-          <img
-            className={styles.propertyItemImage}
-            src={propertyItem?.images[0].url}
-            alt=''
-          />
-        </div>
-        <div className={styles.propertyItemHeadings}>
-          {!isRequestedByUrl && (
-            <h5 className={styles.propertyItemType}>{propertyItem?.type}</h5>
-          )}
-          <h3>{propertyItem?.title}</h3>
-        </div>
-        <div className={styles.propertyItemSpecifications}>
-          <p>
-            <span>{propertyItem?.tenants}</span> inquilini
-          </p>
-          <p>
-            <span>{propertyItem?.baths}</span> bagno
-          </p>
-          <p>
-            <span>{propertyItem?.beds}</span> letti
-          </p>
-        </div>
-        {isRequestedByUrl && (
-          <p className={styles.propertyItemAddress}>
-            {`${propertyItem?.street} ${propertyItem?.street_number}, ${propertyItem?.cap} ${propertyItem?.city}`}
-          </p>
-        )}
-        <p className={styles.propertyItemDescription}>
-          {propertyItem?.description}
-        </p>
-      </div>
-      <div className={styles.propertyItemPrice}>
-        <h4>Canone d'affitto</h4>
-        <p className={styles.propertyItemPriceValue}>
-          <span>{`${propertyItem && CURRENCIES[propertyItem.currency]} ${
-            propertyItem?.price
-          } `}</span>
-          /mese
-        </p>
-      </div>
-      {isRequestedByUrl && <Button>Prenota alloggio</Button>}
+          </div>
+          <div className={styles.propertyItemPrice}>
+            <h4>Canone d'affitto</h4>
+            <p className={styles.propertyItemPriceValue}>
+              <span>{`${propertyItem && CURRENCIES[propertyItem.currency]} ${
+                propertyItem?.price
+              } `}</span>
+              /mese
+            </p>
+          </div>
+          {isRequestedByUrl && <Button>Prenota alloggio</Button>}
+        </>
+      )}
     </article>
   );
 };

@@ -1,0 +1,32 @@
+.loader {
+  width: 100%;
+  height: 0.6rem;
+  background-color: var(--color-background-light-elements);
+  border-radius: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.loader::before {
+  content: '';
+  width: 50%;
+  height: 100%;
+  background-color: var(--color-main);
+  border-radius: 1rem;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  animation: loader-moving 2s infinite ease-in-out;
+}
+
+@keyframes loader-moving {
+  0% {
+    transform: translateX(-50%);
+  }
+  50% {
+    transform: translateX(150%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}

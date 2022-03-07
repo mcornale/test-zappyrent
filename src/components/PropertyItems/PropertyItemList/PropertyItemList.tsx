@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { PropertiesContext } from '../../../context/PropertiesContext';
 import Card from '../../Card/Card';
 import Error from '../../Error/Error';
+import Loader from '../../Loader/Loader';
 import PropertyItem from '../PropertyItem/PropertyItem';
 
 import styles from './PropertyItemList.module.css';
@@ -13,6 +14,7 @@ const PropertyItemList = () => {
 
   return (
     <>
+      {properties === null && <Loader />}
       {errorFetchingProperties && <Error error={errorFetchingProperties} />}
       {!errorFetchingProperties && (
         <div className={styles.propertyItemListWrapper}>
