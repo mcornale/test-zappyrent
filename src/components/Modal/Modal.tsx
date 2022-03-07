@@ -24,7 +24,7 @@ const Modal = (props: Props) => {
   }, []);
 
   const handleCloseBtnClick = () => {
-    navigate(-1);
+    navigate('/');
   };
 
   return createPortal(
