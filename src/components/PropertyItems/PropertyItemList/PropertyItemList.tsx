@@ -1,29 +1,35 @@
 import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { PropertiesContext } from '../../../context/PropertiesContext';
+import Card from '../../Card/Card';
 import Error from '../../Error/Error';
 import PropertyItem from '../PropertyItem/PropertyItem';
 
 import styles from './PropertyItemList.module.css';
 
 const PropertyItemList = () => {
-  const { properties, isFetching, errorFetchingProperties } =
+  const { properties, errorFetchingProperties } =
     useContext(PropertiesContext)!;
-
-  const propertyItemListWrapperClassNameArr = [styles.propertyItemListWrapper];
-  if (isFetching)
-    propertyItemListWrapperClassNameArr.push(
-      styles.propertyItemListWrapperOverlay
-    );
 
   return (
     <>
       {errorFetchingProperties && <Error error={errorFetchingProperties} />}
       {!errorFetchingProperties && (
-        <div className={propertyItemListWrapperClassNameArr.join(' ')}>
-          {!isFetching && <p>{properties?.length} alloggi trovati</p>}
+        <div className={styles.propertyItemListWrapper}>
+          {properties && <p>{properties?.length} alloggi trovati</p>}
           <section className={styles.propertyItemList}>
-            {properties.map((propertyItem) => (
-              <PropertyItem key={propertyItem.id} propertyItem={propertyItem} />
+            {properties?.map((propertyItem) => (
+              <Link
+                to={`/${propertyItem?.title
+                  .split(' ')
+                  .join('-')
+                  .toLowerCase()}`}
+                key={propertyItem.id}
+              >
+                <Card>
+                  <PropertyItem propertyItem={propertyItem} />
+                </Card>
+              </Link>
             ))}
           </section>
         </div>

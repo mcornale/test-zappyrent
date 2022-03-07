@@ -1,6 +1,20 @@
 .propertyItem {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  position: relative;
+}
+
+.propertyItemFullInfo {
+  text-align: center;
+  width: 60rem;
+}
+
+.propertyItemData {
+  display: flex;
+  flex-direction: column;
 }
 
 .propertyItemImageWrapper {
@@ -24,31 +38,39 @@
 
 .propertyItemImage {
   position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   object-fit: contain;
 }
 
-.propertyItemData {
-  flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.propertyItemHeadings {
+  padding: 2rem 2rem 0 2rem;
+}
+
+.propertyItemFullInfo .propertyItemHeadings {
+  order: -1;
+  padding: 0 2rem 2rem 2rem;
 }
 
 .propertyItemType {
   margin-bottom: 0.4rem;
 }
 
-.propertyItemDetailsRow {
-  padding: 2rem 0;
+.propertyItemSpecifications {
   display: flex;
   gap: 2rem;
+  padding: 2rem;
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--color-light-text-and-details);
 }
 
-.propertyItemDetailsRow span {
+.propertyItemFullInfo .propertyItemSpecifications {
+  justify-content: center;
+}
+
+.propertyItemSpecifications span {
   font-size: 1.7rem;
   font-weight: 700;
   margin-right: 0.2rem;
@@ -56,21 +78,30 @@
 }
 
 .propertyItemDescription {
+  padding: 0 2rem 2rem 2rem;
   font-size: 1.3rem;
   font-weight: 600;
   color: var(--color-light-text-and-details);
 }
 
-.propertyItemDetails,
-.propertyItemPrice {
-  padding: 2rem;
+.propertyItemAddress {
+  font-weight: 800;
+  font-size: 1.4rem;
+  padding-bottom: 2rem;
 }
 
 .propertyItemPrice {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  width: 100%;
   border-top: 0.1rem solid var(--color-background-light-elements);
+  padding: 2rem;
+}
+
+.propertyItemFullInfo .propertyItemPrice {
+  justify-content: center;
+  gap: 1rem;
 }
 
 .propertyItemPrice h4 {
@@ -86,4 +117,8 @@
 .propertyItemPriceValue span {
   font-weight: 800;
   color: var(--color-dark-text);
+}
+
+.propertyItem button {
+  width: 50%;
 }

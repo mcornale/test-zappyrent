@@ -1,5 +1,5 @@
 import styles from './MultiSelect.module.css';
-import arrowDownSrc from '../../assets/icons/arrow-down.svg';
+import arrowDownIconSrc from '../../assets/icons/arrow-down.svg';
 import CheckBox from '../CheckBox/CheckBox';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
@@ -59,7 +59,7 @@ const MultiSelect = (props: Props) => {
         className={multiSelectClassNameArr.join(' ')}
       >
         <label>{multiSelectLabel}</label>
-        <img src={arrowDownSrc} alt='select arrow' />
+        <img src={arrowDownIconSrc} alt='select arrow' />
       </button>
       {isMultiSelectOpen && (
         <div className={styles.multiSelectOptions}>

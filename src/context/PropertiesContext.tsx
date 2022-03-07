@@ -8,7 +8,7 @@ import {
 import { PropertyItemType } from '../types/properties';
 
 type PropertiesContextProps = null | {
-  properties: PropertyItemType[];
+  properties: PropertyItemType[] | null;
   selectedPropertyTypes: string[];
   setSelectedPropertyTypes: Dispatch<SetStateAction<string[]>>;
   showOnlyAvailableProperties: boolean;
@@ -26,7 +26,7 @@ const PropertiesContext = createContext<PropertiesContextProps>(null);
 const PropertiesContextProvider = (props: PropertiesContextProviderProps) => {
   const { children } = props;
 
-  const [properties, setProperties] = useState([]);
+  const [properties, setProperties] = useState<PropertyItemType[] | null>(null);
 
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState<string[]>(
     []
