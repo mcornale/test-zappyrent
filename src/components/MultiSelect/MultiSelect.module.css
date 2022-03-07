@@ -1,3 +1,8 @@
+.multiSelectWrapper {
+  position: relative;
+  width: 20rem;
+}
+
 .multiSelect {
   color: var(--color-light-text-and-details);
   border-radius: 3rem;
@@ -8,8 +13,7 @@
   align-items: center;
   gap: 1;
   cursor: pointer;
-  position: relative;
-  width: 20rem;
+  width: 100%;
 }
 
 .multiSelect label {
@@ -36,4 +40,11 @@
   border: 0.1rem solid var(--color-light-text-and-details);
   padding: 0.8rem;
   margin-top: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.multiSelectOptions > * {
+  width: 100%;
 }
