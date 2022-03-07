@@ -9,7 +9,7 @@ const FilterBar = () => {
   const { setShowOnlyAvailableProperties, setSelectedPropertyTypes } =
     useContext(PropertiesContext)!;
 
-  const handleOnlyAvailablePropertiesChange = () => {
+  const handleShowOnlyAvailablePropertiesChange = () => {
     setShowOnlyAvailableProperties(
       (prevShowOnlyAvailableProperties) => !prevShowOnlyAvailableProperties
     );
@@ -24,7 +24,7 @@ const FilterBar = () => {
       />
       <CheckBox
         label='Disponibile subito'
-        onChange={handleOnlyAvailablePropertiesChange}
+        onChange={handleShowOnlyAvailablePropertiesChange}
       />
     </div>
   );
