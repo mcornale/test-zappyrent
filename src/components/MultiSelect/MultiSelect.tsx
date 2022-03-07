@@ -2,6 +2,7 @@ import styles from './MultiSelect.module.css';
 import arrowDownIconSrc from '../../assets/icons/arrow-down.svg';
 import CheckBox from '../CheckBox/CheckBox';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 
 type Props = {
   label: string;
@@ -64,7 +65,12 @@ const MultiSelect = (props: Props) => {
         <img src={arrowDownIconSrc} alt='select arrow' />
       </button>
       {isMultiSelectOpen && (
-        <div className={styles.multiSelectOptions}>
+        <motion.div
+          initial={{ opacity: 0, y: '-20%' }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: '-20%' }}
+          className={styles.multiSelectOptions}
+        >
           {options.map((option, index) => (
             <CheckBox
               key={index}
@@ -74,7 +80,7 @@ const MultiSelect = (props: Props) => {
               labelAfter
             />
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );

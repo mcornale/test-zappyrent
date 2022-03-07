@@ -10,6 +10,7 @@
 .propertyItemFullInfo {
   text-align: center;
   width: min(60rem, 90vw);
+  min-height: 48rem;
 }
 
 .propertyItemData {

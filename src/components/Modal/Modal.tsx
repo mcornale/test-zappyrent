@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 import closeIconSrc from '../../assets/icons/close.svg';
 
@@ -29,7 +30,13 @@ const Modal = (props: Props) => {
 
   return createPortal(
     <>
-      <div className={styles.modalWindow}>
+      <motion.div
+        initial={{ x: '-50%', y: '80%' }}
+        animate={{ x: '-50%', y: '-50%' }}
+        exit={{ x: '-50%', y: '80%' }}
+        transition={{ type: 'tween', duration: 0.6 }}
+        className={styles.modalWindow}
+      >
         <button
           onClick={handleCloseBtnClick}
           className={styles.modalWindowCloseBtn}
@@ -37,8 +44,13 @@ const Modal = (props: Props) => {
           <img src={closeIconSrc} alt='close modal' />
         </button>
         {children}
-      </div>
-      <div className={styles.modalBackdrop}></div>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className={styles.modalBackdrop}
+      ></motion.div>
     </>,
     document.getElementById('modal')!
   );
