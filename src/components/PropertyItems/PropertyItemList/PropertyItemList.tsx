@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from 'framer-motion';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { PropertiesContext } from '../../../context/PropertiesContext';
@@ -9,7 +10,7 @@ import PropertyItem from '../PropertyItem/PropertyItem';
 import styles from './PropertyItemList.module.css';
 
 const PropertyItemList = () => {
-  const { properties, errorFetchingProperties } =
+  const { properties, isFetching, errorFetchingProperties } =
     useContext(PropertiesContext)!;
 
   return (
@@ -18,6 +19,16 @@ const PropertyItemList = () => {
       {errorFetchingProperties && <Error error={errorFetchingProperties} />}
       {!errorFetchingProperties && (
         <div className={styles.propertyItemListWrapper}>
+          <AnimatePresence>
+            {isFetching && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 0.8 }}
+                exit={{ opacity: 0 }}
+                className={styles.propertyItemListOverlay}
+              ></motion.div>
+            )}
+          </AnimatePresence>
           {properties && <p>{properties?.length} alloggi trovati</p>}
           <section className={styles.propertyItemList}>
             {properties?.map((propertyItem) => (
