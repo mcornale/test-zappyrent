@@ -7,14 +7,16 @@ import { motion } from 'framer-motion';
 type Props = {
   label: string;
   options: string[];
+  selectedOptions: string[];
   onChangeSelectedOptions: Dispatch<SetStateAction<string[]>>;
 };
 
 const MultiSelect = (props: Props) => {
-  const { label, options, onChangeSelectedOptions } = props;
+  const { label, options, selectedOptions, onChangeSelectedOptions } = props;
 
   const [isMultiSelectOpen, setIsMultiSelectOpen] = useState(false);
-  const [activeOptionsArr, setActiveOptionsArr] = useState<string[]>([]);
+  const [activeOptionsArr, setActiveOptionsArr] =
+    useState<string[]>(selectedOptions);
 
   const activeOptionsLength = activeOptionsArr.length;
 
@@ -30,10 +32,12 @@ const MultiSelect = (props: Props) => {
   if (!isMultiSelectOpen && activeOptionsArr.length > 0)
     multiSelectClassNameArr.push(styles.multiSelectOptionsActive);
 
+  //change selected options in the context when multiselect is closed
   useEffect(() => {
     if (!isMultiSelectOpen) onChangeSelectedOptions(activeOptionsArr);
   }, [isMultiSelectOpen, activeOptionsArr, onChangeSelectedOptions]);
 
+  //event handlers
   const handleMultiSelectClick = () => {
     setIsMultiSelectOpen(
       (prevIsMultiSelectOpenState) => !prevIsMultiSelectOpenState

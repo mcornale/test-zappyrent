@@ -6,8 +6,12 @@ import { useContext } from 'react';
 import { PropertiesContext } from '../../context/PropertiesContext';
 
 const FilterBar = () => {
-  const { setShowOnlyAvailableProperties, setSelectedPropertyTypes } =
-    useContext(PropertiesContext)!;
+  const {
+    showOnlyAvailableProperties,
+    setShowOnlyAvailableProperties,
+    selectedPropertyTypes,
+    setSelectedPropertyTypes,
+  } = useContext(PropertiesContext)!;
 
   const handleShowOnlyAvailablePropertiesChange = () => {
     setShowOnlyAvailableProperties(
@@ -20,10 +24,12 @@ const FilterBar = () => {
       <MultiSelect
         label='Tipologia'
         options={PROPERTY_TYPES}
+        selectedOptions={selectedPropertyTypes}
         onChangeSelectedOptions={setSelectedPropertyTypes}
       />
       <CheckBox
         label='Disponibile subito'
+        checked={showOnlyAvailableProperties}
         onChange={handleShowOnlyAvailablePropertiesChange}
       />
     </div>
