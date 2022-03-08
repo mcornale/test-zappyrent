@@ -4,14 +4,18 @@ import styles from './CheckBox.module.css';
 type Props = {
   label: string;
   labelAfter?: boolean;
-  onChange?: () => void;
-  checked?: boolean;
+  onChange: () => void;
+  checked: boolean;
 };
 
 const CheckBox = (props: Props) => {
-  const { label, labelAfter, onChange, checked } = props;
+  const { label, labelAfter, checked, onChange } = props;
 
-  const [isChecked, setIsChecked] = useState(checked ?? false);
+  const [isChecked, setIsChecked] = useState(checked);
+
+  const checkBoxGroupClassNameArr = [styles.checkBoxGroup];
+  if (labelAfter)
+    checkBoxGroupClassNameArr.push(styles.checkBoxGroupLabelAfter);
 
   const handleCheckBoxChange = () => {
     setIsChecked((prevCheckBoxState) => !prevCheckBoxState);
@@ -19,11 +23,7 @@ const CheckBox = (props: Props) => {
   };
 
   return (
-    <label
-      className={`${styles.checkBoxGroup} ${
-        labelAfter && styles.checkBoxGroupLabelAfter
-      }`}
-    >
+    <label className={checkBoxGroupClassNameArr.join(' ')}>
       {label}
       <input
         onChange={handleCheckBoxChange}
